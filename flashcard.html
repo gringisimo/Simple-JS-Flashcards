@@ -1,0 +1,61 @@
+<html>
+
+<p id="card">Start Learning</p>
+
+<input style="display:none;" id="previouscard" type="button" onclick="previouscard()" value="Previous Card"/>
+<input id="cardbutton" type="button" onclick="showcard()" value="Start Test"/>
+
+
+<script>
+
+
+var cards = { 
+                         "0": {"front": "I", "back":"Wo" },
+                         "1": {"front": "You", "back":"Ni" },
+                         "2": {"front": "Us", "back":"Women" },
+                         "3": {"front": "Him", "back":"Ta" },
+                         "4": {"front": "Them", "back":"Tamen" }
+                     };
+var frontback = "front";
+var i = 0;
+	function showcard(){
+
+		if(cards[i]==undefined){
+			document.getElementById('previouscard').setAttribute("style","display:none;");
+			document.getElementById('cardbutton').value="Start Over";
+			document.getElementById('card').innerHTML = "The End";
+			i = 0;
+		}else if(frontback == "front"){
+			if(i > 0){
+				document.getElementById('previouscard').removeAttribute("style");
+			}
+			document.getElementById('cardbutton').value="Show Answer";
+			document.getElementById('card').innerHTML = cards[i].front;
+			frontback = "back";
+		}else if(frontback == "back"){
+			document.getElementById('cardbutton').value="Next Card";
+			document.getElementById('card').innerHTML = cards[i].back;
+			i++;
+			frontback = "front";
+		}
+
+		
+	}
+
+	function previouscard(){
+			if(i == 1){
+				document.getElementById('previouscard').setAttribute("style","display:none;");
+
+			}
+			if(frontback=="front"){
+				i = i-2;
+				showcard();
+			}else{
+				i--;
+				frontback = "front";
+				showcard();
+			}
+	}
+
+</script>
+</html>
